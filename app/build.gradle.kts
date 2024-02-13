@@ -58,6 +58,7 @@ dependencies {
     //CORRUTINES
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     //GLIDE
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07")
     implementation("com.github.bumptech.glide:compose:1.0.0-beta01")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
@@ -74,4 +75,6 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation ("androidx.navigation:navigation-compose:2.7.5")
+
 }
