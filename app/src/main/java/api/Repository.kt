@@ -6,8 +6,8 @@ class Repository {
 
     val apiInterface = APIInterface.create()
 
-    suspend fun getAllCharacters() = apiInterface.getCharacters()
-    suspend fun getCharacter(characterId: MutableLiveData<Int>) = apiInterface.getCharacterDetail(characterId)
+    suspend fun getAllCharacters(pagina: Int) = apiInterface.getCharacters(pagina = pagina)
+    suspend fun getCharacter(characterId: Int) = apiInterface.getCharacterDetail(characterId)
 } 
 /*
             Result {

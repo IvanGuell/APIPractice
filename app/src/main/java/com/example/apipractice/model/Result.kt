@@ -1,6 +1,8 @@
 package com.example.apipractice.model
 
-data class Result(
+data class
+
+Result(
     val created: String,
     val episode: List<String>,
     val gender: String,

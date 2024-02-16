@@ -19,8 +19,8 @@ class APIViewModel: ViewModel() {
     val loading = _loading
     private val _characters = MutableLiveData<Data>()
     val characters = _characters
-    private val _characterId = MutableLiveData<Int>()
-    val characterId = _characterId
+    var characterId = 0
+    var pagina = 1
 
     private val _character = MutableLiveData<Result>()
     val character = _character
@@ -28,7 +28,7 @@ class APIViewModel: ViewModel() {
 
     fun getCharacters(){
         CoroutineScope(Dispatchers.IO).launch {
-            val response = repository.getAllCharacters()
+            val response = repository.getAllCharacters(pagina)
             withContext(Dispatchers.Main) {
                 if(response.isSuccessful){
                     _characters.value = response.body()
@@ -43,7 +43,7 @@ class APIViewModel: ViewModel() {
 
     fun getCharactersInt(){
         CoroutineScope(Dispatchers.IO).launch {
-            val response = repository.getCharacter(_characterId)
+            val response = repository.getCharacter(characterId)
             withContext(Dispatchers.Main) {
                 if(response.isSuccessful){
                     _character.value = response.body()
@@ -54,6 +54,10 @@ class APIViewModel: ViewModel() {
                 }
             }
         }
+    }
+
+    fun set_CharcterID(id: Int){
+        this.characterId = id
     }
 }
 

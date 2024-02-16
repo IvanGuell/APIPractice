@@ -12,7 +12,6 @@ import com.example.apipractice.model.Result
 
 @Composable
 fun DetailScreen(navController: NavController, apiViewModel: APIViewModel) {
-    val characterId by remember { mutableStateOf(apiViewModel.characterId) }
 
 
 }

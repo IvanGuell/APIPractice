@@ -9,13 +9,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import com.example.apipractice.model.Result
+import retrofit2.http.Query
 
 interface APIInterface {
 
     @GET("character")
-    suspend fun getCharacters(): Response<Data>
+    suspend fun getCharacters(@Query("page") pagina: Int): Response<Data>
     @GET("character/{id}")
-    suspend fun getCharacterDetail(@Path("id") charId: MutableLiveData<Int>): Response<Result>
+    suspend fun getCharacterDetail(@Path("id") charId: Int): Response<Result>
 
     companion object {
         val BASE_URL = "https://rickandmortyapi.com/api/"
