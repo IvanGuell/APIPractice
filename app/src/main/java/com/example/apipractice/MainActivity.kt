@@ -12,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.example.apipractice.ui.theme.APIPracticeTheme
-import com.example.apipractice.view.MyRecyclerView
 import com.example.apipractice.viewModel.APIViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
