@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -37,19 +39,23 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.apipractice.Routes
+import com.example.apipractice.navigation.Routes
 import com.example.apipractice.model.Data
 import com.example.apipractice.model.Info
 import com.example.apipractice.model.Result
+import com.example.apipractice.navigation.BottomNavigationScreens
+import com.example.apipractice.navigation.TopBottomNavigation
 import com.example.apipractice.viewModel.APIViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavController, apiViweModel: APIViewModel) {
-    Scaffold(topBar = { MyTopAppBar()}) {
+
+    Scaffold(bottomBar = { MyBottomAppBar()}) {
         Box(
             modifier = Modifier.fillMaxSize().padding(it)
         ) {
@@ -57,8 +63,6 @@ fun MainScreen(navController: NavController, apiViweModel: APIViewModel) {
             paginationButtons(navController, apiViweModel)
         }
     }
-
-
 
 
 }
@@ -204,3 +208,29 @@ fun MyTopAppBar() {
     )
 }
 
+@Composable
+fun MyBottomAppBar(navController: NavController, apiViweModel: APIViewModel){
+    val bottomNavigationItems = listOf(
+        BottomNavigationScreens.Home,
+        BottomNavigationScreens.Favorite,
+        BottomNavigationScreens.Settigns
+    )
+    BottomNavigation(backgroundColor = Color.Red){
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+        val currentRoute = navBackStackEntry?.destination?.route
+        bottomNavigationItems.forEach { item ->
+            BottomNavigationItem(
+                icon = { Icon(item.icon, contentDescription = item.label)},
+                label = { Text(item.label)},
+                selected = currentRoute == item.route,
+                selectedContentColor = Color.White,
+                unselectedContentColor = Color.Black,
+                alwaysShowLabel = false,
+                onClick = {
+                    if (currentRoute != item.route){
+                        navController.navigate(item.route)
+                    }
+                }
+            )
+    }
+}

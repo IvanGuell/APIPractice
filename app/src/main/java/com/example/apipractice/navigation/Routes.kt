@@ -1,4 +1,4 @@
-package com.example.apipractice
+package com.example.apipractice.navigation
 
 sealed class Routes(val route: String) {
     object MainScreen : Routes("main_screen")
