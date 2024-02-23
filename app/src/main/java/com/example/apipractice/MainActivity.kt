@@ -17,7 +17,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.apipractice.navigation.Routes
 import com.example.apipractice.view.DetailScreen
+import com.example.apipractice.view.FavoritesScreen
 import com.example.apipractice.view.MainScreen
+import com.example.apipractice.view.SettingsScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -40,6 +42,9 @@ class MainActivity : ComponentActivity() {
                 ) {
                     composable(Routes.MainScreen.route) { MainScreen(navController = navigationController, myViewModel) }
                     composable(Routes.DetailScreen.route) { DetailScreen(navController = navigationController, myViewModel) }
+                    composable(Routes.FavoritesScreen.route) { FavoritesScreen(navController = navigationController, myViewModel) }
+                    composable(Routes.SettingsScreen.route) { SettingsScreen(navController = navigationController, myViewModel) }
+
                 }
             }
         }

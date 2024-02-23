@@ -47,7 +47,6 @@ import com.example.apipractice.model.Data
 import com.example.apipractice.model.Info
 import com.example.apipractice.model.Result
 import com.example.apipractice.navigation.BottomNavigationScreens
-import com.example.apipractice.navigation.TopBottomNavigation
 import com.example.apipractice.viewModel.APIViewModel
 
 
@@ -55,9 +54,11 @@ import com.example.apipractice.viewModel.APIViewModel
 @Composable
 fun MainScreen(navController: NavController, apiViweModel: APIViewModel) {
 
-    Scaffold(bottomBar = { MyBottomAppBar()}) {
+    Scaffold(bottomBar = { MyBottomAppBar(navController, apiViweModel) }) {
         Box(
-            modifier = Modifier.fillMaxSize().padding(it)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(it)
         ) {
             MyRecyclerView(apiViweModel, navController)
             paginationButtons(navController, apiViweModel)
@@ -209,28 +210,30 @@ fun MyTopAppBar() {
 }
 
 @Composable
-fun MyBottomAppBar(navController: NavController, apiViweModel: APIViewModel){
+fun MyBottomAppBar(navController: NavController, apiViweModel: APIViewModel) {
     val bottomNavigationItems = listOf(
         BottomNavigationScreens.Home,
         BottomNavigationScreens.Favorite,
-        BottomNavigationScreens.Settigns
+        BottomNavigationScreens.Settings
     )
-    BottomNavigation(backgroundColor = Color.Red){
+    BottomNavigation(backgroundColor = Color.Red) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
+
         bottomNavigationItems.forEach { item ->
             BottomNavigationItem(
-                icon = { Icon(item.icon, contentDescription = item.label)},
-                label = { Text(item.label)},
+                icon = { Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back") },
+                label = { Text("") },
                 selected = currentRoute == item.route,
                 selectedContentColor = Color.White,
                 unselectedContentColor = Color.Black,
                 alwaysShowLabel = false,
                 onClick = {
-                    if (currentRoute != item.route){
+                    if (currentRoute != item.route) {
                         navController.navigate(item.route)
                     }
                 }
             )
+        }
     }
 }
