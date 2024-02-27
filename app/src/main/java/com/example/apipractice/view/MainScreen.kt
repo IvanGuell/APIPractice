@@ -23,11 +23,11 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -54,17 +54,9 @@ import com.example.apipractice.viewModel.APIViewModel
 @Composable
 fun MainScreen(navController: NavController, apiViweModel: APIViewModel) {
 
-    Scaffold(bottomBar = { MyBottomAppBar(navController, apiViweModel) }) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(it)
-        ) {
-            MyRecyclerView(apiViweModel, navController)
-            paginationButtons(navController, apiViweModel)
-        }
-    }
 
+    MyRecyclerView(apiViweModel, navController)
+    paginationButtons(navController, apiViweModel)
 
 }
 
@@ -179,61 +171,4 @@ fun CharacterItem(character: Result, navController: NavController, apiViweModel:
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MyTopAppBar() {
-    TopAppBar(
-        title = { Text(text = "My Amazing TopBar") },
-        colors = TopAppBarDefaults.smallTopAppBarColors(
-            containerColor = Color.Red,
-            titleContentColor = Color.White,
-            navigationIconContentColor = Color.White,
-            actionIconContentColor = Color.White
-        ),
-        navigationIcon = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back")
-            }
-        },
-        actions = {
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Filled.Search, contentDescription = "Search")
-            }
 
-            IconButton(onClick = { /*TODO*/ }) {
-                Icon(imageVector = Icons.Filled.Add, contentDescription = "Add")
-
-            }
-
-        }
-    )
-}
-
-@Composable
-fun MyBottomAppBar(navController: NavController, apiViweModel: APIViewModel) {
-    val bottomNavigationItems = listOf(
-        BottomNavigationScreens.Home,
-        BottomNavigationScreens.Favorite,
-        BottomNavigationScreens.Settings
-    )
-    BottomNavigation(backgroundColor = Color.Red) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-
-        bottomNavigationItems.forEach { item ->
-            BottomNavigationItem(
-                icon = { Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back") },
-                label = { Text("") },
-                selected = currentRoute == item.route,
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.Black,
-                alwaysShowLabel = false,
-                onClick = {
-                    if (currentRoute != item.route) {
-                        navController.navigate(item.route)
-                    }
-                }
-            )
-        }
-    }
-}

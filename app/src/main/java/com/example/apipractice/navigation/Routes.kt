@@ -6,7 +6,6 @@ sealed class Routes(val route: String) {
         fun createRoute(characterId: String): String {
             return "detail_screen/$characterId"
         }
-
     }
     object FavoritesScreen : Routes("favorites_screen")
     object SettingsScreen : Routes("settings_screen")

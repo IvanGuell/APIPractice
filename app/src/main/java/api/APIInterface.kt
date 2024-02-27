@@ -30,5 +30,4 @@ interface APIInterface {
             return retrofit.create(APIInterface::class.java)
         }
     }
-
 }
