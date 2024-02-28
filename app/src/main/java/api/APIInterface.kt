@@ -1,6 +1,5 @@
 package com.example.retrofitapp.api
 
-import androidx.lifecycle.MutableLiveData
 import com.example.apipractice.model.Data
 import okhttp3.OkHttpClient
 import retrofit2.Response
@@ -8,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
-import com.example.apipractice.model.Result
+import com.example.apipractice.model.CharacterResult
 import retrofit2.http.Query
 
 interface APIInterface {
@@ -16,7 +15,7 @@ interface APIInterface {
     @GET("character")
     suspend fun getCharacters(@Query("page") pagina: Int): Response<Data>
     @GET("character/{id}")
-    suspend fun getCharacterDetail(@Path("id") charId: Int): Response<Result>
+    suspend fun getCharacterDetail(@Path("id") charId: Int): Response<CharacterResult>
 
     companion object {
         val BASE_URL = "https://rickandmortyapi.com/api/"

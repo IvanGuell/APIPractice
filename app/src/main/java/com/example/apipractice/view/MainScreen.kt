@@ -2,7 +2,6 @@ package com.example.apipractice.view
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,10 +11,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
@@ -45,7 +40,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.apipractice.navigation.Routes
 import com.example.apipractice.model.Data
 import com.example.apipractice.model.Info
-import com.example.apipractice.model.Result
+import com.example.apipractice.model.CharacterResult
 import com.example.apipractice.navigation.BottomNavigationScreens
 import com.example.apipractice.viewModel.APIViewModel
 
@@ -78,7 +73,7 @@ fun MyRecyclerView(apiViweModel: APIViewModel, navController: NavController) {
         )
     } else {
         LazyColumn() {
-            items(characters.results) { character ->
+            items(characters.characterResults) { character ->
                 CharacterItem(character, navController, apiViweModel)
             }
         }
@@ -136,7 +131,7 @@ fun paginationButtons(navController: NavController, apiViewModel: APIViewModel) 
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CharacterItem(character: Result, navController: NavController, apiViweModel: APIViewModel) {
+fun CharacterItem(character: CharacterResult, navController: NavController, apiViweModel: APIViewModel) {
     println(character.image)
 
     Card(

@@ -33,6 +33,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.navigation.NavController
 import com.example.apipractice.ui.theme.APIPracticeTheme
 import com.example.apipractice.viewModel.APIViewModel
@@ -134,11 +135,12 @@ fun MyBottomAppBar(navController: NavController, bottomNavigationItems: List<Bot
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyTopAppBar(navController: NavController, apiViewModel: APIViewModel) {
-    val show: Boolean by apiViewModel.show.observeAsState(false)
+    val showSearchBar: Boolean by apiViewModel.show.observeAsState(false)
+
 
 
     TopAppBar(
-        title = { Text(text = "My TopBar") },
+        title = { Text(text = "Ricky Morty te saludan") },
         colors = TopAppBarDefaults.smallTopAppBarColors(
             containerColor = Color.Red,
             titleContentColor = Color.White,
@@ -147,10 +149,11 @@ fun MyTopAppBar(navController: NavController, apiViewModel: APIViewModel) {
         ),
 
         actions = {
+
             IconButton(onClick = { apiViewModel.changeShow() }) {
                 Icon(imageVector = Icons.Filled.Search, contentDescription = "Search")
             }
-            if (show){
+            if (showSearchBar){
                 MySearchBar(apiViewModel)
 
             }
@@ -168,11 +171,10 @@ fun MySearchBar (apiViewModel: APIViewModel) {
         onSearch = { apiViewModel.onSearchTextChange(it) },
         active = true,
         leadingIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = "Search")},
-        trailingIcon = { Icon( imageVector = Icons.Filled.AddCircle, contentDescription = "Mic")},
         placeholder = { Text("What are you looking for?") },
         onActiveChange = {}, modifier = Modifier
             .fillMaxHeight(0.1f)
-            .clip(CircleShape)) {
+            .clip(RectangleShape)) {
     }
 }
 
