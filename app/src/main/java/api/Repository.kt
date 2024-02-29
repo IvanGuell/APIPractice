@@ -1,7 +1,7 @@
 package com.example.retrofitapp.api
 
 import androidx.lifecycle.MutableLiveData
-import com.example.apilistapp.models.CharacterApplication
+import com.example.apipractice.model.CharacterApplication
 import com.example.apipractice.model.CharacterResult
 
 class Repository {

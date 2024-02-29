@@ -76,7 +76,7 @@ class APIViewModel: ViewModel() {
     fun onSearchTextChange(text: String){
         _searchText.value = text
         var charactersFiltered = Data(Info(1, "next", "prev", 42),
-            _charactersAPI.value!!.characterResults.filter { it.name.lowercase().contains(text.lowercase()) })
+            _charactersAPI.value!!.results.filter { it.name.lowercase().contains(text.lowercase()) })
         _characters.value = charactersFiltered
         if (text.isEmpty()) _characters.value = _charactersAPI.value
 

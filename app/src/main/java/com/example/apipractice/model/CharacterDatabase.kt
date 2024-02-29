@@ -1,4 +1,4 @@
-package com.example.apilistapp.models
+package com.example.apipractice.model
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

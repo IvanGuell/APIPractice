@@ -1,4 +1,4 @@
-package com.example.apilistapp.models
+package com.example.apipractice.model
 
 import android.app.Application
 import androidx.room.Room
@@ -13,6 +13,6 @@ class CharacterApplication: Application() {
         super.onCreate()
         database = Room.databaseBuilder(
             this, CharacterDatabase::class.java, "CharacterDatabase"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 }
