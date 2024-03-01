@@ -38,12 +38,6 @@ import com.example.apipractice.viewModel.APIViewModel
 @Composable
 fun FavoritesScreen(navController: NavController, apiViewModel: APIViewModel) {
 
-    FavsRecyclerView(apiViewModel, navController)
-
-}
-
-@Composable
-fun FavsRecyclerView(apiViewModel: APIViewModel, navController: NavController) {
     val favorites: MutableList<CharacterResult> by apiViewModel.favorites.observeAsState(mutableListOf())
     apiViewModel.getFavorites()
     if (favorites.isNotEmpty()) {
@@ -51,16 +45,18 @@ fun FavsRecyclerView(apiViewModel: APIViewModel, navController: NavController) {
             modifier = Modifier
         ) {
             items(favorites) {
-                FavItem(character = it, apiViewModel = apiViewModel, navController = navController)
+                Favorites(character = it, apiViewModel = apiViewModel, navController = navController)
             }
         }
     }
 }
 
 
+
+
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun FavItem(character: CharacterResult, apiViewModel: APIViewModel, navController: NavController) {
+fun Favorites(character: CharacterResult, apiViewModel: APIViewModel, navController: NavController) {
     Card(
         border = BorderStroke(
             2.dp,
