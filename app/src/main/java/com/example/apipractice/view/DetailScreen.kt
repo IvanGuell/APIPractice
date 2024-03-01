@@ -58,7 +58,7 @@ fun DetailScreen(navController: NavController, apiViewModel: APIViewModel) {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(200.dp)
+                    .height(400.dp)
                     .clip(RoundedCornerShape(8.dp))
             )
             Box(
@@ -70,7 +70,7 @@ fun DetailScreen(navController: NavController, apiViewModel: APIViewModel) {
                 FavButton(apiViewModel)
             }
             Text(
-                text = it.name,
+                text = "Name: ${it.name}",
                 modifier = Modifier
                     .padding(vertical = 8.dp)
             )
