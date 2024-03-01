@@ -12,40 +12,41 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.apipractice.model.CharacterResult
 
-class APIViewModel: ViewModel() {
+class APIViewModel : ViewModel() {
 
     private val repository = Repository()
     private val _loading = MutableLiveData(true)
     val loading = _loading
     private val _characters = MutableLiveData<Data>()
     val characters = _characters
+
     var pagina = 1
+    var id = 0
+
     private val _searchText = MutableLiveData<String>()
     val searchText = _searchText
-
+    private val _show = MutableLiveData<Boolean>()
+    val show = _show
     private val _character = MutableLiveData<CharacterResult>()
     val character = _character
 
     private val _charactersAPI = MutableLiveData<Data>()
     val charactersAPI = _charactersAPI
-    private val _show = MutableLiveData<Boolean>()
-    val show = _show
 
     private val _isFavorite = MutableLiveData<Boolean>()
     val isFavorite = _isFavorite
     private val _favorites = MutableLiveData<MutableList<CharacterResult>>()
     val favorites = _favorites
-    var id = 0
-    fun getCharacters(){
+
+    fun getCharacters() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = repository.getAllCharacters(pagina)
             withContext(Dispatchers.Main) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     _characters.value = response.body()
                     _charactersAPI.value = _characters.value
                     _loading.value = false
-                }
-                else{
+                } else {
                     Log.e("Error :", response.message())
                 }
             }
@@ -70,10 +71,12 @@ class APIViewModel: ViewModel() {
         this.id = id
     }
 
-    fun onSearchTextChange(text: String){
+    fun onSearchTextChange(text: String) {
         _searchText.value = text
         val charactersFiltered = Data(Info(1, "next", "prev", 42),
-            _charactersAPI.value!!.results.filter { it.name.lowercase().contains(text.lowercase()) })
+            _charactersAPI.value!!.results.filter {
+                it.name.lowercase().contains(text.lowercase())
+            })
         _characters.value = charactersFiltered
         if (text.isEmpty()) _characters.value = _charactersAPI.value
 

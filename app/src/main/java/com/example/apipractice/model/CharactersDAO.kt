@@ -6,13 +6,16 @@ import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
-interface CharactersDAO{
+interface CharactersDAO {
     @Query("SELECT * FROM CharacterEntity")
     suspend fun getAllCharacters(): MutableList<CharacterResult>
+
     @Query("SELECT * FROM CharacterEntity WHERE id = :id")
-    suspend fun getCharacterById(id:Int): MutableList<CharacterResult>
+    suspend fun getCharacterById(id: Int): MutableList<CharacterResult>
+
     @Insert
     suspend fun addCharacter(character: CharacterResult)
+
     @Delete
     suspend fun deleteCharacter(character: CharacterResult)
 }

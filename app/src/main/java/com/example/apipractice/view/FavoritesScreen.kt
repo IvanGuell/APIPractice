@@ -36,25 +36,33 @@ import com.example.apipractice.viewModel.APIViewModel
 @Composable
 fun FavoritesScreen(navController: NavController, apiViewModel: APIViewModel) {
 
-    val favorites: MutableList<CharacterResult> by apiViewModel.favorites.observeAsState(mutableListOf())
+    val favorites: MutableList<CharacterResult> by apiViewModel.favorites.observeAsState(
+        mutableListOf()
+    )
     apiViewModel.getFavorites()
     if (favorites.isNotEmpty()) {
         LazyColumn(
             modifier = Modifier
         ) {
             items(favorites) {
-                Favorites(character = it, apiViewModel = apiViewModel, navController = navController)
+                Favorites(
+                    character = it,
+                    apiViewModel = apiViewModel,
+                    navController = navController
+                )
             }
         }
     }
 }
 
 
-
-
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun Favorites(character: CharacterResult, apiViewModel: APIViewModel, navController: NavController) {
+fun Favorites(
+    character: CharacterResult,
+    apiViewModel: APIViewModel,
+    navController: NavController
+) {
     Card(
         border = BorderStroke(2.dp, Color(0xBEB7DCEF)),
 

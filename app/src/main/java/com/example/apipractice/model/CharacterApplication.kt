@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.room.Room
 
 
-class CharacterApplication: Application() {
+class CharacterApplication : Application() {
     companion object {
         lateinit var database: CharacterDatabase
     }

@@ -7,6 +7,7 @@ sealed class Routes(val route: String) {
             return "detail_screen/$characterId"
         }
     }
+
     object FavoritesScreen : Routes("favorites_screen")
 
 

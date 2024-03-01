@@ -120,7 +120,7 @@ fun PaginationButtons(apiViewModel: APIViewModel) {
             modifier = Modifier
                 .weight(1f)
                 .height(48.dp),
-                colors = ButtonDefaults.buttonColors(
+            colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF468499),
                 contentColor = MaterialTheme.colorScheme.primary
             )
@@ -137,7 +137,11 @@ fun PaginationButtons(apiViewModel: APIViewModel) {
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CharacterItem(character: CharacterResult, navController: NavController, apiViweModel: APIViewModel) {
+fun CharacterItem(
+    character: CharacterResult,
+    navController: NavController,
+    apiViweModel: APIViewModel
+) {
     println(character.image)
 
     Card(
@@ -158,31 +162,31 @@ fun CharacterItem(character: CharacterResult, navController: NavController, apiV
                 .fillMaxSize()
                 .background(Color(0xFFb0e0e6)),
         ) {
-        Row(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-                .background(Color(0xFFb0e0e6))
-        ) {
-            GlideImage(
-                model = character.image,
-                contentDescription = "Character Image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.size(100.dp)
-            )
-
-            Text(
-                text = character.name,
-                style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center,
+            Row(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = 30.dp),
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
+                    .padding(16.dp)
+                    .fillMaxWidth()
+                    .background(Color(0xFFb0e0e6))
+            ) {
+                GlideImage(
+                    model = character.image,
+                    contentDescription = "Character Image",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.size(100.dp)
+                )
+
+                Text(
+                    text = character.name,
+                    style = MaterialTheme.typography.bodyLarge,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 30.dp),
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
         }
-    }
     }
 }
 

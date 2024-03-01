@@ -14,6 +14,7 @@ interface APIInterface {
 
     @GET("character")
     suspend fun getCharacters(@Query("page") pagina: Int): Response<Data>
+
     @GET("character/{id}")
     suspend fun getCharacterDetail(@Path("id") charId: Int): Response<CharacterResult>
 

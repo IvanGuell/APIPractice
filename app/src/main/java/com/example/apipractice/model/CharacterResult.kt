@@ -2,6 +2,7 @@ package com.example.apipractice.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+
 @Entity(tableName = "CharacterEntity")
 data class CharacterResult(
     val created: String,

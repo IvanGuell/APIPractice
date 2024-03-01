@@ -5,6 +5,6 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = arrayOf(CharacterResult::class), version = 1)
-abstract class CharacterDatabase:RoomDatabase(){
-    abstract fun characterDao():CharactersDAO
+abstract class CharacterDatabase : RoomDatabase() {
+    abstract fun characterDao(): CharactersDAO
 }
