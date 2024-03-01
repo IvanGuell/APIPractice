@@ -13,6 +13,6 @@ class CharacterApplication: Application() {
         super.onCreate()
         database = Room.databaseBuilder(
             this, CharacterDatabase::class.java, "CharacterDatabase"
-        ).fallbackToDestructiveMigration().build()
+        ).build()
     }
 }

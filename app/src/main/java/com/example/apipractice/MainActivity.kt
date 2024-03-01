@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -167,10 +168,12 @@ fun MySearchBar (apiViewModel: APIViewModel) {
         onSearch = { apiViewModel.onSearchTextChange(it) },
         active = true,
         leadingIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = "Search")},
-        placeholder = { Text("What are you looking for?") },
-        onActiveChange = {}, modifier = Modifier
+        placeholder = { Text("Introduce para buscar") },
+        onActiveChange = {},
+        modifier = Modifier
             .fillMaxHeight(0.1f)
             .clip(RectangleShape)) {
+
     }
 }
 

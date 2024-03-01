@@ -47,6 +47,7 @@ fun DetailScreen(navController: NavController, apiViewModel: APIViewModel) {
 
 
     character?.let {
+        apiViewModel.isFavorite(it)
         Column(
             modifier = Modifier
                 .fillMaxSize()

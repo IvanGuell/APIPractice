@@ -2,6 +2,7 @@ package com.example.apipractice.view
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,6 +11,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -19,8 +22,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -34,6 +39,8 @@ import com.example.apipractice.model.Data
 import com.example.apipractice.model.Info
 import com.example.apipractice.model.CharacterResult
 import com.example.apipractice.viewModel.APIViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -55,6 +62,7 @@ fun MyRecyclerView(apiViweModel: APIViewModel, navController: NavController) {
             emptyList()
         )
     )
+    val lazyListState = rememberLazyListState()
 
     apiViweModel.getCharacters()
     if (showLoading) {
@@ -63,13 +71,34 @@ fun MyRecyclerView(apiViweModel: APIViewModel, navController: NavController) {
             color = MaterialTheme.colorScheme.secondary
         )
     } else {
-        LazyColumn() {
-            items(characters.results) { character ->
-                CharacterItem(character, navController, apiViweModel)
+        LaunchedEffect(apiViweModel.pagina) {
+            // CoroutineScope para manejar las coroutines específicas de este Composable
+            val coroutineScope = rememberCoroutineScope()
+
+            // LazyColumn para mostrar los elementos de la lista
+            LazyColumn(
+                state = lazyListState,
+                contentPadding = PaddingValues(bottom = 16.dp)
+            ) {
+                itemsIndexed(characters.results) { index, character ->
+                    CharacterItem(character, navController, apiViweModel)
+
+                    // Cuando llegues al final de la lista, carga más datos
+                    if (index == characters.results.size - 1) {
+                        // Utilizar el CoroutineScope específico de este Composable
+                        coroutineScope.launch {
+                            // Retrasar la carga de más datos
+                            delay(300) // Ajusta el tiempo de espera según sea necesario
+                            apiViweModel.pagina++
+                            apiViweModel.getCharacters()
+                        }
+                    }
+                }
             }
         }
     }
 }
+
 
 @Composable
 fun paginationButtons(navController: NavController, apiViewModel: APIViewModel) {
