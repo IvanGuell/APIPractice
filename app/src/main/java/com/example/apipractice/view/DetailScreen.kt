@@ -81,14 +81,14 @@ fun DetailScreen(navController: NavController, apiViewModel: APIViewModel) {
                     .padding(16.dp)
                     .height(200.dp)
                     .align(alignment = Alignment.CenterHorizontally),
-                border = BorderStroke(2.dp, Color(0xFF5BE5E9)),
+                border = BorderStroke(2.dp, Color(0xFFb0e0e6)),
                 shape = RoundedCornerShape(8.dp)
             )
             {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Color(0xFF5BE5E9)),
+                        .background(Color(0xFFb0e0e6)),
                 ) {
 
                     Text(
@@ -145,7 +145,7 @@ fun FavButton(apiViewModel: APIViewModel) {
     val character by apiViewModel.character.observeAsState()
 
     Icon(
-        tint = Color(0xFF5BE5E9),
+        tint = Color(0xFFb0e0e6),
         modifier = Modifier
             .graphicsLayer {
                 scaleX = 1.9f

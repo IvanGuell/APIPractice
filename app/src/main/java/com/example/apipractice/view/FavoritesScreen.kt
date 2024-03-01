@@ -89,7 +89,7 @@ fun Favorites(character: CharacterResult, apiViewModel: APIViewModel, navControl
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(Color(0xFF5BE5E9)),
+                            .background(Color(0xFFb0e0e6)),
 
                         ) {
                         Text(

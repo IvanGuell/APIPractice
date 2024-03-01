@@ -12,7 +12,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import com.example.apipractice.model.CharacterResult
 
-
 class APIViewModel: ViewModel() {
 
     private val repository = Repository()
@@ -20,7 +19,6 @@ class APIViewModel: ViewModel() {
     val loading = _loading
     private val _characters = MutableLiveData<Data>()
     val characters = _characters
-    var characterId = 0
     var pagina = 1
     private val _searchText = MutableLiveData<String>()
     val searchText = _searchText
@@ -38,7 +36,6 @@ class APIViewModel: ViewModel() {
     private val _favorites = MutableLiveData<MutableList<CharacterResult>>()
     val favorites = _favorites
     var id = 0
-
     fun getCharacters(){
         CoroutineScope(Dispatchers.IO).launch {
             val response = repository.getAllCharacters(pagina)

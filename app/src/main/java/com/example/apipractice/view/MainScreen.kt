@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -26,6 +27,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -62,7 +64,6 @@ fun MyRecyclerView(apiViweModel: APIViewModel, navController: NavController) {
             emptyList()
         )
     )
-    val lazyListState = rememberLazyListState()
 
     apiViweModel.getCharacters()
     if (showLoading) {
@@ -71,19 +72,9 @@ fun MyRecyclerView(apiViweModel: APIViewModel, navController: NavController) {
             color = MaterialTheme.colorScheme.secondary
         )
     } else {
-        LazyColumn(
-            state = lazyListState,
-            contentPadding = PaddingValues(bottom = 16.dp)
-        ) {
-            itemsIndexed(characters.results) { index, character ->
+        LazyColumn() {
+            items(characters.results) { character ->
                 CharacterItem(character, navController, apiViweModel)
-
-
-                // Cuando llegues al final de la lista, carga más datos
-                if (index == characters.results.size - 1) {
-                    apiViweModel.pagina++
-                    apiViweModel.getCharacters()
-                }
             }
         }
     }
@@ -92,28 +83,12 @@ fun MyRecyclerView(apiViweModel: APIViewModel, navController: NavController) {
 @Composable
 fun paginationButtons(navController: NavController, apiViewModel: APIViewModel) {
 
-    Row {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 600.dp)
+    ) {
 
-
-        Button(
-            onClick = {
-                apiViewModel.pagina++
-                apiViewModel.getCharacters()
-            },
-            enabled = apiViewModel.pagina != null,
-            modifier = Modifier
-                .weight(1f)
-                .padding(end = 10.dp, top = 50.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Black,
-                contentColor = MaterialTheme.colorScheme.primary
-            )
-        ) {
-            Text(
-                text = "Siguiente",
-                color = Color.White
-            )
-        }
         Button(
             onClick = {
                 apiViewModel.pagina--
@@ -123,7 +98,8 @@ fun paginationButtons(navController: NavController, apiViewModel: APIViewModel) 
             enabled = apiViewModel.pagina != null,
             modifier = Modifier
                 .weight(1f)
-                .padding(end = 50.dp, top = 10.dp),
+                .padding(end = 8.dp)
+                .height(48.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.secondary,
                 contentColor = MaterialTheme.colorScheme.primary
@@ -135,6 +111,26 @@ fun paginationButtons(navController: NavController, apiViewModel: APIViewModel) 
             )
 
         }
+        Button(
+            onClick = {
+                apiViewModel.pagina++
+                apiViewModel.getCharacters()
+            },
+            enabled = apiViewModel.pagina != null,
+            modifier = Modifier
+                .weight(1f)
+                .height(48.dp),
+                colors = ButtonDefaults.buttonColors(
+                containerColor = Color.Black,
+                contentColor = MaterialTheme.colorScheme.primary
+            )
+        ) {
+            Text(
+                text = "Siguiente",
+                color = Color.White
+            )
+        }
+
     }
 }
 
@@ -145,7 +141,7 @@ fun CharacterItem(character: CharacterResult, navController: NavController, apiV
 
     Card(
 
-        border = BorderStroke(2.dp, Color(0xFF5BE5E9)),
+        border = BorderStroke(2.dp, Color(0xFFb0e0e6)),
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(8.dp)
@@ -159,13 +155,13 @@ fun CharacterItem(character: CharacterResult, navController: NavController, apiV
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFF5BE5E9)),
+                .background(Color(0xFFb0e0e6)),
         ) {
         Row(
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()
-                .background(Color(0xFF5BE5E9))
+                .background(Color(0xFFb0e0e6))
         ) {
             GlideImage(
                 model = character.image,

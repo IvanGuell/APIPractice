@@ -103,7 +103,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyBottomAppBar(navController: NavController, bottomNavigationItems: List<BottomNavigationScreens>) {
 
-    BottomNavigation(backgroundColor = Color(0xFF5BE5E9)) {
+    BottomNavigation(backgroundColor = Color(0xFF468499)) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
@@ -143,7 +143,7 @@ fun MyTopAppBar(navController: NavController, apiViewModel: APIViewModel) {
             text = "Personajes"
         ) },
         colors = TopAppBarDefaults.smallTopAppBarColors(
-            containerColor = Color(0xFF5BE5E9),
+            containerColor = Color(0xFF468499),
             titleContentColor = Color.Black,
             navigationIconContentColor = Color.White,
             actionIconContentColor = Color.White
