@@ -58,10 +58,8 @@ fun FavoritesScreen(navController: NavController, apiViewModel: APIViewModel) {
 @Composable
 fun Favorites(character: CharacterResult, apiViewModel: APIViewModel, navController: NavController) {
     Card(
-        border = BorderStroke(
-            2.dp,
-            Color(0xBEB7DCEF)
-        ),
+        border = BorderStroke(2.dp, Color(0xBEB7DCEF)),
+
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(8.dp)
@@ -69,6 +67,7 @@ fun Favorites(character: CharacterResult, apiViewModel: APIViewModel, navControl
                 navController.navigate(Routes.DetailScreen.route)
                 apiViewModel.set_Id(character.id)
             }
+
     ) {
         Box(
             modifier = Modifier
@@ -83,15 +82,14 @@ fun Favorites(character: CharacterResult, apiViewModel: APIViewModel, navControl
                 Column {
                     GlideImage(
                         model = character.image,
-                        contentDescription = "Character image",
-
+                        contentDescription = "Character",
                         contentScale = ContentScale.Crop,
                     )
 
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(Color(0xBEB7DCEF)),
+                            .background(Color(0xFF5BE5E9)),
 
                         ) {
                         Text(
@@ -101,7 +99,7 @@ fun Favorites(character: CharacterResult, apiViewModel: APIViewModel, navControl
                             style = MaterialTheme.typography.bodyLarge,
                             textAlign = TextAlign.Center,
                             fontSize = 25.sp,
-                            color = Color(0xFF916036)
+                            color = Color.Black
                         )
                     }
                 }

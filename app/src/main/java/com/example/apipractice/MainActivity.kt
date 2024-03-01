@@ -9,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomNavigation
@@ -35,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.example.apipractice.ui.theme.APIPracticeTheme
 import com.example.apipractice.viewModel.APIViewModel
@@ -101,7 +103,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyBottomAppBar(navController: NavController, bottomNavigationItems: List<BottomNavigationScreens>) {
 
-    BottomNavigation(backgroundColor = Color.Red) {
+    BottomNavigation(backgroundColor = Color(0xFF5BE5E9)) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
@@ -116,8 +118,8 @@ fun MyBottomAppBar(navController: NavController, bottomNavigationItems: List<Bot
 
                 label = { androidx.compose.material.Text("") },
                 selected = currentRoute == item.route,
-                selectedContentColor = Color.White,
-                unselectedContentColor = Color.Black,
+                selectedContentColor = Color.Black,
+                unselectedContentColor = Color(0xFF1b4445),
                 alwaysShowLabel = false,
                 onClick = {
                     if (currentRoute != item.route) {
@@ -134,13 +136,15 @@ fun MyBottomAppBar(navController: NavController, bottomNavigationItems: List<Bot
 fun MyTopAppBar(navController: NavController, apiViewModel: APIViewModel) {
     val showSearchBar: Boolean by apiViewModel.show.observeAsState(false)
 
-
-
     TopAppBar(
-        title = { Text(text = "Ricky Morty te saludan") },
+        title = { Text(
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            text = "Personajes"
+        ) },
         colors = TopAppBarDefaults.smallTopAppBarColors(
-            containerColor = Color.Red,
-            titleContentColor = Color.White,
+            containerColor = Color(0xFF5BE5E9),
+            titleContentColor = Color.Black,
             navigationIconContentColor = Color.White,
             actionIconContentColor = Color.White
         ),
@@ -168,7 +172,7 @@ fun MySearchBar (apiViewModel: APIViewModel) {
         onSearch = { apiViewModel.onSearchTextChange(it) },
         active = true,
         leadingIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = "Search")},
-        placeholder = { Text("Introduce para buscar") },
+        placeholder = { Text("Personaje a buscar") },
         onActiveChange = {},
         modifier = Modifier
             .fillMaxHeight(0.1f)

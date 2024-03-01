@@ -1,7 +1,9 @@
 package com.example.apipractice.view
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,8 +29,10 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
@@ -140,7 +144,8 @@ fun CharacterItem(character: CharacterResult, navController: NavController, apiV
     println(character.image)
 
     Card(
-        border = BorderStroke(2.dp, Color.LightGray),
+
+        border = BorderStroke(2.dp, Color(0xFF5BE5E9)),
         shape = RoundedCornerShape(8.dp),
         modifier = Modifier
             .padding(8.dp)
@@ -151,10 +156,16 @@ fun CharacterItem(character: CharacterResult, navController: NavController, apiV
 
             }
     ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFF5BE5E9)),
+        ) {
         Row(
             modifier = Modifier
                 .padding(16.dp)
                 .fillMaxWidth()
+                .background(Color(0xFF5BE5E9))
         ) {
             GlideImage(
                 model = character.image,
@@ -166,9 +177,15 @@ fun CharacterItem(character: CharacterResult, navController: NavController, apiV
             Text(
                 text = character.name,
                 style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center, modifier = Modifier.fillMaxSize()
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 30.dp),
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
             )
         }
+    }
     }
 }
 
