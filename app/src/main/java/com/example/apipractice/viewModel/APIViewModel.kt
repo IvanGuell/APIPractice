@@ -37,6 +37,7 @@ class APIViewModel: ViewModel() {
     val isFavorite = _isFavorite
     private val _favorites = MutableLiveData<MutableList<CharacterResult>>()
     val favorites = _favorites
+    var id = 0
 
     fun getCharacters(){
         CoroutineScope(Dispatchers.IO).launch {
@@ -54,24 +55,22 @@ class APIViewModel: ViewModel() {
         }
     }
 
-    fun getCharactersInt(){
+    fun getCharacter() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = repository.getCharacter(characterId)
+            val response = repository.getCharacter(id)
             withContext(Dispatchers.Main) {
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
                     _character.value = response.body()
                     _loading.value = false
-                }
-                else{
-                    Log.e("Error :", response.message())
+                } else {
+                    Log.e("Error: ", response.message())
                 }
             }
         }
     }
 
-    fun set_CharcterID(id: Int){
-        this.characterId = id
-
+    fun set_Id(id: Int) {
+        this.id = id
     }
 
     fun onSearchTextChange(text: String){

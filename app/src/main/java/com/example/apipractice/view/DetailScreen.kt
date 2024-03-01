@@ -14,6 +14,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -37,16 +42,16 @@ import com.example.apipractice.viewModel.APIViewModel
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun DetailScreen(navController: NavController, apiViewModel: APIViewModel) {
+    apiViewModel.getCharacter()
     val character by apiViewModel.character.observeAsState()
 
-    // Verificar si el personaje no es nulo antes de mostrar los detalles
+
     character?.let {
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            // Mostrar la imagen del personaje
             GlideImage(
                 model = it.image,
                 contentDescription = "Character Image",
@@ -56,30 +61,33 @@ fun DetailScreen(navController: NavController, apiViewModel: APIViewModel) {
                     .height(200.dp)
                     .clip(RoundedCornerShape(8.dp))
             )
-
-            // Mostrar el nombre del personaje
+            Box(
+                modifier = Modifier
+                    .padding(start = 192.dp, top = 32.dp)
+                    .clickable {
+                    }
+            ) {
+                FavButton(apiViewModel)
+            }
             Text(
                 text = it.name,
                 modifier = Modifier
                     .padding(vertical = 8.dp)
             )
 
-            // Mostrar el género del personaje
             Text(
-                text = "Género: ${it.gender}",
+                text = "Genre: ${it.gender}",
                 modifier = Modifier
                     .padding(vertical = 4.dp)
             )
 
-            // Mostrar la especie del personaje
             Text(
-                text = "Especie: ${it.species}",
+                text = "Specie: ${it.species}",
                 modifier = Modifier
                     .padding(vertical = 4.dp)
             )
         }
     } ?: run {
-        // Manejar el caso cuando el personaje es nulo
         Text(
             text = "Detalles no disponibles",
             modifier = Modifier
@@ -88,4 +96,29 @@ fun DetailScreen(navController: NavController, apiViewModel: APIViewModel) {
             textAlign = TextAlign.Center
         )
     }
+}
+
+
+@Composable
+fun FavButton(apiViewModel: APIViewModel) {
+    val isFavorite by apiViewModel.isFavorite.observeAsState(false)
+    val character by apiViewModel.character.observeAsState()
+
+    Icon(
+        tint = Color(0xFFE46F92),
+        modifier = Modifier
+            .graphicsLayer {
+                scaleX = 1.3f
+                scaleY = 1.3f
+            }
+            .clickable {
+                apiViewModel.favController(character, isFavorite)
+            },
+        imageVector = if (isFavorite == true) {
+            Icons.Filled.Favorite
+        } else {
+            Icons.Default.FavoriteBorder
+        },
+        contentDescription = null
+    )
 }
