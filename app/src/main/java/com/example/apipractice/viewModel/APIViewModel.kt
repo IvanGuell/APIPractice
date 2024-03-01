@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.apipractice.model.Data
 import com.example.apipractice.model.Info
-import com.example.retrofitapp.api.Repository
+import com.example.apipractice.api.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,7 +72,7 @@ class APIViewModel: ViewModel() {
 
     fun onSearchTextChange(text: String){
         _searchText.value = text
-        var charactersFiltered = Data(Info(1, "next", "prev", 42),
+        val charactersFiltered = Data(Info(1, "next", "prev", 42),
             _charactersAPI.value!!.results.filter { it.name.lowercase().contains(text.lowercase()) })
         _characters.value = charactersFiltered
         if (text.isEmpty()) _characters.value = _charactersAPI.value

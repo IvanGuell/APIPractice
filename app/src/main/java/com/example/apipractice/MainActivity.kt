@@ -4,23 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.AddCircle
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -49,8 +43,6 @@ import com.example.apipractice.navigation.Routes
 import com.example.apipractice.view.DetailScreen
 import com.example.apipractice.view.FavoritesScreen
 import com.example.apipractice.view.MainScreen
-import com.example.apipractice.view.MyRecyclerView
-import com.example.apipractice.view.paginationButtons
 
 
 class MainActivity : ComponentActivity() {
@@ -87,7 +79,7 @@ class MainActivity : ComponentActivity() {
                                     MainScreen(navController = navigationController, myViewModel)
                                 }
                                 composable(Routes.DetailScreen.route) {
-                                    DetailScreen(navController = navigationController, myViewModel)
+                                    DetailScreen(myViewModel)
                                 }
                                 composable(Routes.FavoritesScreen.route) {
                                     FavoritesScreen(navController = navigationController, myViewModel)

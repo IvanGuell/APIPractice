@@ -1,8 +1,8 @@
-package com.example.retrofitapp.api
+package com.example.apipractice.api
 
-import androidx.lifecycle.MutableLiveData
 import com.example.apipractice.model.CharacterApplication
 import com.example.apipractice.model.CharacterResult
+import com.example.retrofitapp.api.APIInterface
 
 class Repository {
 
@@ -18,8 +18,4 @@ class Repository {
     suspend fun isFavorite(character:CharacterResult) = daoInterface.getCharacterById(character.id).isNotEmpty()
     suspend fun getFavorites()= daoInterface.getAllCharacters()
 
-} 
-/*
-            Result {
-        return apiInterface.getCharacterDetail(characterId).body() ?: throw NoSuchElementException("Character not found")
-    }}*/
+}
