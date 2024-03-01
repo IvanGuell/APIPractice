@@ -71,6 +71,7 @@ class APIViewModel: ViewModel() {
 
     fun set_CharcterID(id: Int){
         this.characterId = id
+
     }
 
     fun onSearchTextChange(text: String){

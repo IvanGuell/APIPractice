@@ -47,7 +47,6 @@ import com.example.apipractice.view.DetailScreen
 import com.example.apipractice.view.FavoritesScreen
 import com.example.apipractice.view.MainScreen
 import com.example.apipractice.view.MyRecyclerView
-import com.example.apipractice.view.SettingsScreen
 import com.example.apipractice.view.paginationButtons
 
 
@@ -89,9 +88,6 @@ class MainActivity : ComponentActivity() {
                                 }
                                 composable(Routes.FavoritesScreen.route) {
                                     FavoritesScreen(navController = navigationController, myViewModel)
-                                }
-                                composable(Routes.SettingsScreen.route) {
-                                    SettingsScreen(navController = navigationController, myViewModel)
                                 }
                             }
                         }

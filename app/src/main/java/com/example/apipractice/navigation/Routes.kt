@@ -8,7 +8,6 @@ sealed class Routes(val route: String) {
         }
     }
     object FavoritesScreen : Routes("favorites_screen")
-    object SettingsScreen : Routes("settings_screen")
 
 
 }

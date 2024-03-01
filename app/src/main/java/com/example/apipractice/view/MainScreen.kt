@@ -131,8 +131,10 @@ fun CharacterItem(character: CharacterResult, navController: NavController, apiV
         modifier = Modifier
             .padding(8.dp)
             .clickable {
-                navController.navigate(Routes.DetailScreen.createRoute(character.id.toString()))
                 apiViweModel.set_CharcterID(apiViweModel.characterId)
+                apiViweModel.getCharactersInt()
+                navController.navigate(Routes.DetailScreen.createRoute(character.id.toString()))
+
             }
     ) {
         Row(
